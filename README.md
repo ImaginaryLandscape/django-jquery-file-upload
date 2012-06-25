@@ -1,4 +1,4 @@
-[jQuery-File-Upload](http://aquantum-demo.appspot.com/file-upload) is developed by Sebastian Tschan, with the source available on [github](https://github.com/blueimp/jQuery-File-Upload). Example code is [ported to Django](https://github.com/sigurdga/django-jquery-file-upload) by Sigurd Gartmann ([sigurdga on github](https://github.com/sigurdga/)).
+[jQuery-File-Upload](http://aquantum-demo.appspot.com/file-upload) is developed by Sebastian Tschan, with the source available on [github](https://github.com/blueimp/jQuery-File-Upload). Example code is [ported to Django](https://github.com/sigurdga/django-jquery-file-upload) by Sigurd Gartmann ([sigurdga on github](https://github.com/sigurdga/)).  Example extended to show how to create a custom view for models with extra required fields.
 
 Introduction
 ============
@@ -23,6 +23,7 @@ Installation
 ============
 
 * run ./manage.py syncdb
+* log into localhost:8000/admin/
 * go to localhost:8000/upload/new/
 * upload some files
 
