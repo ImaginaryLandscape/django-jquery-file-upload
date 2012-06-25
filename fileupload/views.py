@@ -4,7 +4,6 @@ from django.views.generic import CreateView, DeleteView
 from django.http import HttpResponse
 from django.utils import simplejson
 from django.core.urlresolvers import reverse
-
 from django.conf import settings
 
 def response_mimetype(request):
@@ -24,6 +23,30 @@ class PictureCreateView(CreateView):
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
 
+def multiple_uploader(request):
+    if request.POST:
+        if request.FILES == None:
+            raise Http404("No objects uploaded")
+        f = request.FILES['file']
+
+        a = Picture()
+        a.creator = request.user
+        a.file.save(f.name, f)
+        a.save()
+
+        result = [{'name': f.name,
+                   'size': f.size,
+                   'url': a.file.url,
+                 },]
+
+        response_data = simplejson.dumps(result)
+        if "application/json" in request.META['HTTP_ACCEPT_ENCODING']:
+            mimetype = 'application/json'
+        else:
+            mimetype = 'text/plain'
+        return HttpResponse(response_data, mimetype=mimetype)
+    else:
+        return HttpResponse('Only POST accepted')
 
 class PictureDeleteView(DeleteView):
     model = Picture

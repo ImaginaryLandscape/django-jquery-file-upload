@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Picture(models.Model):
 
@@ -6,9 +7,10 @@ class Picture(models.Model):
     # depending on PIL. You will probably want ImageField in your app.
     file = models.FileField(upload_to="pictures")
     slug = models.SlugField(max_length=50, blank=True)
+    creator = models.ForeignKey(User)
 
     def __unicode__(self):
-        return self.file
+        return self.file.name
 
     @models.permalink
     def get_absolute_url(self):
